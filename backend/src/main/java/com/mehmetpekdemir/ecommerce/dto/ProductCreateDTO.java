@@ -15,11 +15,9 @@ import lombok.Setter;
 @Getter
 @Setter
 public class ProductCreateDTO {
-	
 	private String name;
 	private String barcode;
 	private Double price;
 	private String description;
 	private Long categoryId;
-
 }

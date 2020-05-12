@@ -35,7 +35,7 @@ public class CategoryAPI {
 	}
 	
 	@GetMapping("/get/{id}")
-	public CategoryViewDTO getCategories(@PathVariable("id") Long id) {
+	public CategoryViewDTO getCategoryById(@PathVariable("id") Long id) {
 		return categoryService.getCategoryById(id);
 	}
 	

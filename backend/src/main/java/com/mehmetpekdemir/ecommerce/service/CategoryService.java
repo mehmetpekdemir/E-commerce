@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.mehmetpekdemir.ecommerce.dto.CategoryCreateDTO;
 import com.mehmetpekdemir.ecommerce.dto.CategoryViewDTO;
+import com.mehmetpekdemir.ecommerce.entity.Category;
 
 /**
  * 
@@ -12,6 +13,10 @@ import com.mehmetpekdemir.ecommerce.dto.CategoryViewDTO;
  */
 public interface CategoryService {
 	public List<CategoryViewDTO> getCategories();
+
 	public CategoryViewDTO getCategoryById(Long categoryId);
+	
+	public Category getCategoryByCategoryId(Long categoryId);
+
 	public CategoryViewDTO createCategory(CategoryCreateDTO categoryCreateDTO);
 }

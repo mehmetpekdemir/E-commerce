@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 /**
  * 
  * @author MEHMET PEKDEMIR
- * @since May 11, 2020
+ * @since May 12, 2020
  */
 @Data
 @NoArgsConstructor
@@ -48,5 +48,5 @@ public class Product {
 		this.description = description;
 		this.category = category;
 	}
-
+	
 }

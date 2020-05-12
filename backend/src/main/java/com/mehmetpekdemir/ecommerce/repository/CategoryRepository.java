@@ -10,5 +10,5 @@ import com.mehmetpekdemir.ecommerce.entity.Category;
  * @since May 11, 2020
  */
 public interface CategoryRepository extends JpaRepository<Category, Long> {
-	Boolean existsByName(String name);
+	public Boolean existsByName(String name);
 }

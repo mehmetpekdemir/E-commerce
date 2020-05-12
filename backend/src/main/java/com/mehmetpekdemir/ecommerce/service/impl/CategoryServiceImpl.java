@@ -39,10 +39,16 @@ public class CategoryServiceImpl implements CategoryService {
 
 	@Override
 	@Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
-	public CategoryViewDTO getCategoryById(Long categoryId) {
-		Category category = categoryRepository.findById(categoryId)
-				.orElseThrow(() -> new ServiceException(String.format("Category not found with ID #%d", categoryId)));
+	public CategoryViewDTO getCategoryById(Long id) {
+		Category category = categoryRepository.findById(id)
+				.orElseThrow(() -> new ServiceException(String.format("Category not found with ID %d", id)));
 		return CategoryViewDTO.of(category);
+	}
+	
+	@Override
+	public Category getCategoryByCategoryId(Long categoryId) {
+		return categoryRepository.findById(categoryId)
+				.orElseThrow(() -> new ServiceException(String.format("Category not found with ID %d", categoryId)));
 	}
 
 	@Override
