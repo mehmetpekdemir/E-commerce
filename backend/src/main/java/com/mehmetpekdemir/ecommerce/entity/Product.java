@@ -8,6 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.mehmetpekdemir.ecommerce.validator.ValidBarcode;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -29,6 +31,7 @@ public class Product {
 	private String name;
 
 	@Column(name = "barcode", nullable = false, unique = true, length = 6)
+	@ValidBarcode
 	private String barcode;
 
 	@Column(name = "price", nullable = false)
