@@ -1,8 +1,6 @@
 # Online Shopping App
 
-### This is a e-commerce project.
-
-#### I developed a web application by using Spring Boot and React.js
+### This is a e-commerce project. NOT FINISHED YET
 
 ### Tech stack
   - Spring Boot
