@@ -2,6 +2,8 @@ package com.mehmetpekdemir.ecommerce.api;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,10 +21,10 @@ import com.mehmetpekdemir.ecommerce.service.CategoryService;
 /**
  * 
  * @author MEHMET PEKDEMIR
- * @since May 11, 2020
+ * @since 1.0
  */
 @RestController
-@RequestMapping("api/category")
+@RequestMapping("api/")
 public class CategoryAPI {
 
 	private final CategoryService categoryService;
@@ -31,27 +33,28 @@ public class CategoryAPI {
 		this.categoryService = categoryService;
 	}
 
-	@GetMapping("/get")
+	@GetMapping("v1/category")
 	public ResponseEntity<List<CategoryViewDTO>> getCategories() {
-		List<CategoryViewDTO> categories = categoryService.getCategories();
+		final List<CategoryViewDTO> categories = categoryService.getCategories();
 		return ResponseEntity.ok(categories);
 	}
-	
-	@GetMapping("/get/{id}")
+
+	@GetMapping("v1/category/{id}")
 	public ResponseEntity<CategoryViewDTO> getCategoryById(@PathVariable("id") Long id) {
-		CategoryViewDTO category = categoryService.getCategoryById(id);
+		final CategoryViewDTO category = categoryService.getCategoryById(id);
 		return ResponseEntity.ok(category);
 	}
-	
-	@PostMapping("/create")
-	public ResponseEntity<CategoryViewDTO> createCategory(@RequestBody CategoryCreateDTO categoryCreateDTO) {
-		 CategoryViewDTO category = categoryService.createCategory(categoryCreateDTO);
-		 return ResponseEntity.ok(category);
+
+	@PostMapping("v1/category")
+	public ResponseEntity<CategoryViewDTO> createCategory(@Valid @RequestBody CategoryCreateDTO categoryCreateDTO) {
+		final CategoryViewDTO category = categoryService.createCategory(categoryCreateDTO);
+		return ResponseEntity.ok(category);
 	}
-	
-	@PutMapping("/update/{id}")
-	public ResponseEntity<CategoryViewDTO> updateCategory(@PathVariable("id") Long id,@RequestBody CategoryUpdateDTO categoryUpdateDTO) {
-		CategoryViewDTO category = categoryService.updateCategory(id,categoryUpdateDTO);
+
+	@PutMapping("v1/category/{id}")
+	public ResponseEntity<CategoryViewDTO> updateCategory(@PathVariable("id") Long id,
+			@Valid @RequestBody CategoryUpdateDTO categoryUpdateDTO) {
+		final CategoryViewDTO category = categoryService.updateCategory(id, categoryUpdateDTO);
 		return ResponseEntity.ok(category);
 	}
 

@@ -2,6 +2,11 @@ package com.mehmetpekdemir.ecommerce.service;
 
 import java.util.List;
 
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.mehmetpekdemir.ecommerce.dto.ProductCreateDTO;
 import com.mehmetpekdemir.ecommerce.dto.ProductUpdateDTO;
 import com.mehmetpekdemir.ecommerce.dto.ProductViewDTO;
@@ -9,16 +14,24 @@ import com.mehmetpekdemir.ecommerce.dto.ProductViewDTO;
 /**
  * 
  * @author MEHMET PEKDEMIR
- * @since May 12, 2020
+ * @since 1.0
  */
 public interface ProductService {
-	public List<ProductViewDTO> getProducts();
 
-	public ProductViewDTO getProductById(Long id);
+	@Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
+	@Cacheable(cacheNames = "getProducts")
+	List<ProductViewDTO> getProducts();
 
-	public ProductViewDTO createProduct(ProductCreateDTO productCreateDTO);
-	
-	public ProductViewDTO updateProduct(Long id ,ProductUpdateDTO productUpdateDTO);
+	@Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
+	ProductViewDTO getProductById(Long id);
 
-	public void deleteProduct(Long id);
+	@CacheEvict(cacheNames = "getProducts")
+	ProductViewDTO createProduct(ProductCreateDTO productCreateDTO);
+
+	@CacheEvict(cacheNames = "getProducts")
+	ProductViewDTO updateProduct(Long id, ProductUpdateDTO productUpdateDTO);
+
+	@CacheEvict(cacheNames = "getProducts")
+	void deleteProduct(Long id);
+
 }

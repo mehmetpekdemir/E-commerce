@@ -1,7 +1,5 @@
 package com.mehmetpekdemir.ecommerce.dto;
 
-import java.io.Serializable;
-
 import com.mehmetpekdemir.ecommerce.entity.Category;
 
 import lombok.Getter;
@@ -9,13 +7,10 @@ import lombok.Getter;
 /**
  * 
  * @author MEHMET PEKDEMIR
- * @since May 11, 2020
+ * @since 1.0
  */
-
 @Getter
-public class CategoryViewDTO implements Serializable {
-
-	private static final long serialVersionUID = 1L;
+public final class CategoryViewDTO {
 
 	private final Long id;
 	private final String name;
@@ -26,10 +21,7 @@ public class CategoryViewDTO implements Serializable {
 	}
 
 	public static CategoryViewDTO of(Category category) {
-		return new CategoryViewDTO(
-				category.getId(), 
-				category.getName()
-		);
+		return new CategoryViewDTO(category.getId(), category.getName());
 	}
 
 }

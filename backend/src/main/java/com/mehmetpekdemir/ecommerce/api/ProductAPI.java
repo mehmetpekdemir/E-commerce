@@ -2,6 +2,8 @@ package com.mehmetpekdemir.ecommerce.api;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,10 +22,10 @@ import com.mehmetpekdemir.ecommerce.service.ProductService;
 /**
  * 
  * @author MEHMET PEKDEMIR
- * @since May 12, 2020
+ * @since 1.0
  */
 @RestController
-@RequestMapping("api/product")
+@RequestMapping("api/")
 public class ProductAPI {
 
 	private final ProductService productService;
@@ -32,32 +34,32 @@ public class ProductAPI {
 		this.productService = productService;
 	}
 
-	@GetMapping("/get")
+	@GetMapping("v1/product")
 	public ResponseEntity<List<ProductViewDTO>> getProducts() {
-		List<ProductViewDTO> products = productService.getProducts();
+		final List<ProductViewDTO> products = productService.getProducts();
 		return ResponseEntity.ok(products);
 	}
 
-	@GetMapping("/get/{id}")
+	@GetMapping("v1/product/{id}")
 	public ResponseEntity<ProductViewDTO> getProductById(@PathVariable("id") Long id) {
-		ProductViewDTO product = productService.getProductById(id);
+		final ProductViewDTO product = productService.getProductById(id);
 		return ResponseEntity.ok(product);
 	}
 
-	@PostMapping("/create")
-	public ResponseEntity<ProductViewDTO> createProduct(@RequestBody ProductCreateDTO productCreateDTO) {
-		ProductViewDTO product = productService.createProduct(productCreateDTO);
+	@PostMapping("v1/product")
+	public ResponseEntity<ProductViewDTO> createProduct(@Valid @RequestBody ProductCreateDTO productCreateDTO) {
+		final ProductViewDTO product = productService.createProduct(productCreateDTO);
 		return ResponseEntity.ok(product);
 	}
 
-	@PutMapping("/update/{id}")
+	@PutMapping("v1/product/{id}")
 	public ResponseEntity<ProductViewDTO> updateProduct(@PathVariable("id") Long id,
-			@RequestBody ProductUpdateDTO productUpdateDTO) {
-		ProductViewDTO product = productService.updateProduct(id, productUpdateDTO);
+			@Valid @RequestBody ProductUpdateDTO productUpdateDTO) {
+		final ProductViewDTO product = productService.updateProduct(id, productUpdateDTO);
 		return ResponseEntity.ok(product);
 	}
 
-	@DeleteMapping("/delete/{id}")
+	@DeleteMapping("v1/product/{id}")
 	public ResponseEntity<?> deleteProduct(@PathVariable("id") Long id) {
 		productService.deleteProduct(id);
 		return ResponseEntity.ok().build();

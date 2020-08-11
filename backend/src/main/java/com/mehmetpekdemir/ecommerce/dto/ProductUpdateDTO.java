@@ -1,21 +1,30 @@
 package com.mehmetpekdemir.ecommerce.dto;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
+
+import lombok.Data;
+
 /**
- * I have created the ProductUpdateDTO.java class because,
- * in some scenarios not all the fields should be updated.
  * 
  * @author MEHMET PEKDEMIR
- * @since May 13, 2020
+ * @since 1.0
  */
-@Getter
-@Setter
-@ToString
+@Data
 public class ProductUpdateDTO {
+
+	@NotNull
 	private String name;
+
+	@NotNull
+	@Positive
 	private Double price;
+
+	@NotNull
 	private String description;
+
+	@NotNull
+	@Positive
 	private Long categoryId;
+	
 }

@@ -2,6 +2,11 @@ package com.mehmetpekdemir.ecommerce.service;
 
 import java.util.List;
 
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.mehmetpekdemir.ecommerce.dto.CategoryCreateDTO;
 import com.mehmetpekdemir.ecommerce.dto.CategoryUpdateDTO;
 import com.mehmetpekdemir.ecommerce.dto.CategoryViewDTO;
@@ -10,16 +15,23 @@ import com.mehmetpekdemir.ecommerce.entity.Category;
 /**
  * 
  * @author MEHMET PEKDEMIR
- * @since May 11, 2020
+ * @since 1.0
  */
 public interface CategoryService {
-	public List<CategoryViewDTO> getCategories();
 
-	public CategoryViewDTO getCategoryById(Long id);
+	@Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
+	@Cacheable(cacheNames = "getCategories")
+	List<CategoryViewDTO> getCategories();
 
-	public Category getCategoryByCategoryId(Long categoryId);
+	@Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
+	CategoryViewDTO getCategoryById(Long id);
 
-	public CategoryViewDTO createCategory(CategoryCreateDTO categoryCreateDTO);
+	Category getCategoryByCategoryId(Long categoryId);
 
-	public CategoryViewDTO updateCategory(Long id, CategoryUpdateDTO categoryUpdateDTO);
+	@CacheEvict(cacheNames = "getCategories", allEntries = true)
+	CategoryViewDTO createCategory(CategoryCreateDTO categoryCreateDTO);
+
+	@CacheEvict(cacheNames = "getCategories", allEntries = true)
+	CategoryViewDTO updateCategory(Long id, CategoryUpdateDTO categoryUpdateDTO);
+
 }
