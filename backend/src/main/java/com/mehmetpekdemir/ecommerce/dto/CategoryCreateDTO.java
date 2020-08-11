@@ -1,18 +1,21 @@
 package com.mehmetpekdemir.ecommerce.dto;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import javax.validation.constraints.NotNull;
+
+import com.mehmetpekdemir.ecommerce.validator.UniqueName;
+
+import lombok.Data;
 
 /**
  * 
  * @author MEHMET PEKDEMIR
- * @since May 11, 2020
+ * @since 1.0
  */
-
-@Getter
-@Setter
-@ToString
+@Data
 public class CategoryCreateDTO {
+	
+	@NotNull
+	@UniqueName
 	private String name;
+	
 }

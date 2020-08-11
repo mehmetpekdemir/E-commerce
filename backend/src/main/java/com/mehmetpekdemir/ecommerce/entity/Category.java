@@ -1,5 +1,6 @@
 package com.mehmetpekdemir.ecommerce.entity;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -16,12 +17,14 @@ import lombok.NoArgsConstructor;
 /**
  * 
  * @author MEHMET PEKDEMIR
- * @since May 11, 2020
+ * @since 1.0
  */
 @Data
 @NoArgsConstructor
 @Entity(name = "categories")
-public class Category {
+public class Category implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,5 +39,5 @@ public class Category {
 	public Category(String name) {
 		this.name = name;
 	}
-	
+
 }

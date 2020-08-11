@@ -1,7 +1,5 @@
 package com.mehmetpekdemir.ecommerce.dto;
 
-import java.io.Serializable;
-
 import com.mehmetpekdemir.ecommerce.entity.Product;
 
 import lombok.Getter;
@@ -9,13 +7,10 @@ import lombok.Getter;
 /**
  * 
  * @author MEHMET PEKDEMIR
- * @since May 11, 2020
+ * @since 1.0
  */
-
 @Getter
-public class ProductViewDTO implements Serializable {
-
-	private static final long serialVersionUID = 1L;
+public final class ProductViewDTO {
 
 	private final Long id;
 	private final String name;
@@ -24,7 +19,7 @@ public class ProductViewDTO implements Serializable {
 	private final String description;
 	private final Long categoryId;
 
-	private ProductViewDTO(Long id,String name, String barcode, Double price, String description, Long categoryId) {
+	private ProductViewDTO(Long id, String name, String barcode, Double price, String description, Long categoryId) {
 		this.id = id;
 		this.name = name;
 		this.barcode = barcode;
@@ -34,14 +29,8 @@ public class ProductViewDTO implements Serializable {
 	}
 
 	public static ProductViewDTO of(Product product) {
-		return new ProductViewDTO(
-				product.getId(),
-				product.getName(), 
-				product.getBarcode(), 
-				product.getPrice(), 
-				product.getDescription(),
-				product.getCategory().getId()
-		);
+		return new ProductViewDTO(product.getId(), product.getName(), product.getBarcode(), product.getPrice(),
+				product.getDescription(), product.getCategory().getId());
 	}
 
 }

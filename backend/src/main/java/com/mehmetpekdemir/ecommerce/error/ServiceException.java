@@ -1,9 +1,9 @@
-package com.mehmetpekdemir.ecommerce.exception;
+package com.mehmetpekdemir.ecommerce.error;
 
 /**
  * 
  * @author MEHMET PEKDEMIR
- * @since May 11, 2020
+ * @since 1.0
  */
 public class ServiceException extends RuntimeException {
 

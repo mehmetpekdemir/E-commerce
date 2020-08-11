@@ -7,24 +7,26 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
+
+
 /**
  * 
  * @author MEHMET PEKDEMIR
- * @since May 13, 2020
+ * @since 1.0
  */
 @Configuration
 @EnableCaching
 public class RedisConfiguration {
-	
+
 	@Value("${spring.redis.host}")
 	private String hostName;
-	
+
 	@Value("${spring.redis.port}")
 	private Integer port;
-	
+
 	@Bean
 	public JedisConnectionFactory jedisConnectionFactory() {
-		RedisStandaloneConfiguration redisStandaloneConfiguration = new RedisStandaloneConfiguration(hostName,port);
+		final RedisStandaloneConfiguration redisStandaloneConfiguration = new RedisStandaloneConfiguration(hostName, port);
 		return new JedisConnectionFactory(redisStandaloneConfiguration);
 	}
 
@@ -35,4 +37,5 @@ public class RedisConfiguration {
 		redisTemplate.setEnableTransactionSupport(true);
 		return redisTemplate;
 	}
+	
 }
